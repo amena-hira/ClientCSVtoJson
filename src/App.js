@@ -1,9 +1,10 @@
-import ShowDashboard from './components/ShowDashboard';
+import { RouterProvider } from 'react-router-dom';
+import routes from './routes/routes';
 
 function App() {
   return (
     <div>
-      <ShowDashboard></ShowDashboard>
+      <RouterProvider router={routes}></RouterProvider>
     </div>
   );
 }
