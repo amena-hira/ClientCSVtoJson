@@ -24,7 +24,7 @@ const Search = ({ searchFilm, setMovies, setCount }) => {
             Year: year
         }
         console.log(movie);
-        fetch(`http://localhost:5000/addMovie?page=${0}&size=${10}`, {
+        fetch(`https://server-wheat-ten.vercel.app/addMovie?page=${0}&size=${10}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -82,19 +82,19 @@ const Search = ({ searchFilm, setMovies, setCount }) => {
                                 <label className="label">
                                     <span className="label-text">AUDIENCE SCORE %</span>
                                 </label>
-                                <input type="text" name='audience' placeholder="AUDIENCE SCORE %" className="input input-bordered" />
+                                <input type="number" name='audience' placeholder="AUDIENCE SCORE %" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">PROFITABILITY</span>
                                 </label>
-                                <input type="text" name='profit' placeholder="PROFITABILITY" className="input input-bordered" />
+                                <input type="number" name='profit' placeholder="PROFITABILITY" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">ROTTEN TOMATOES %</span>
                                 </label>
-                                <input type="text" name='rotten' placeholder="Film" className="input input-bordered" />
+                                <input type="number" name='rotten' placeholder="Film" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -106,7 +106,7 @@ const Search = ({ searchFilm, setMovies, setCount }) => {
                                 <label className="label">
                                     <span className="label-text">Year</span>
                                 </label>
-                                <input type="text" name='year' placeholder="Year" className="input input-bordered" />
+                                <input type="number" name='year' placeholder="Year" className="input input-bordered" />
                             </div>
 
                             <div className="form-control mt-6">

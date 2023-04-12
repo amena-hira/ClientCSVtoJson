@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 const DeleteModal = ({ editMovieInfo }) => {
     const handleDelete = (movie) =>{
         console.log(movie);
-        fetch(`http://localhost:5000/deleteMovie/${movie._id}`, {
+        fetch(`https://server-wheat-ten.vercel.app/deleteMovie/${movie._id}`, {
             method: 'DELETE',
         })
         .then(res => res.json())

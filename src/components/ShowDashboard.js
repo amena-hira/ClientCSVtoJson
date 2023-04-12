@@ -26,7 +26,7 @@ const ShowDashboard = () => {
 
     }
     const search = async (name) => {
-        fetch(`http://localhost:5000/search?film=${name}`)
+        fetch(`https://server-wheat-ten.vercel.app/search?film=${name}`)
             .then(res => res.json())
             .then(data => {
                 setMovies(data.movies);
@@ -34,7 +34,7 @@ const ShowDashboard = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/showData?page=${page}&size=${size}`)
+        fetch(`https://server-wheat-ten.vercel.app/showData?page=${page}&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setMovies(data.movies);
@@ -109,7 +109,7 @@ const ShowDashboard = () => {
                 movies.length === 1 ?
                     <div className='flex justify-center'><button onClick={()=>window.location.reload()} className="btn btn-link text-center">All</button></div>
                     :
-                    <div className='flex justify-center'>
+                    <div className='flex justify-center my-2'>
                         <div className='btn-group pagination'>
                             {
                                 [...Array(pages).keys()].map(number => <button key={number} onClick={() => setPage(number)} className={page === number ? 'btn btn-active' : 'btn'}>{number}</button>)

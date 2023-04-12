@@ -24,7 +24,7 @@ const EditModal = ({ editMovieInfo, setMovies, setCount }) => {
             year
         }
         console.log(editMovie);
-        fetch(`http://localhost:5000/editMovie/${editMovieInfo?._id}`, {
+        fetch(`https://server-wheat-ten.vercel.app/editMovie/${editMovieInfo?._id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -69,19 +69,19 @@ const EditModal = ({ editMovieInfo, setMovies, setCount }) => {
                             <label className="label">
                                 <span className="label-text">AUDIENCE SCORE %</span>
                             </label>
-                            <input type="text" name='audience' defaultValue={editMovieInfo === undefined ? "" : editMovieInfo["Audience score %"]} placeholder="AUDIENCE SCORE %" className="input input-bordered" />
+                            <input type="number" name='audience' defaultValue={editMovieInfo === undefined ? "" : editMovieInfo["Audience score %"]} placeholder="AUDIENCE SCORE %" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">PROFITABILITY</span>
                             </label>
-                            <input type="text" name='profit' defaultValue={editMovieInfo?.Profitability} placeholder="PROFITABILITY" className="input input-bordered" />
+                            <input type="number" name='profit' defaultValue={editMovieInfo?.Profitability} placeholder="PROFITABILITY" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">ROTTEN TOMATOES %</span>
                             </label>
-                            <input type="text" name='rotten' defaultValue={editMovieInfo === undefined ? "" : editMovieInfo["Rotten Tomatoes %"]} placeholder="Film" className="input input-bordered" />
+                            <input type="number" name='rotten' defaultValue={editMovieInfo === undefined ? "" : editMovieInfo["Rotten Tomatoes %"]} placeholder="Film" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -93,7 +93,7 @@ const EditModal = ({ editMovieInfo, setMovies, setCount }) => {
                             <label className="label">
                                 <span className="label-text">Year</span>
                             </label>
-                            <input type="text" name='year' defaultValue={editMovieInfo?.Year} placeholder="Year" className="input input-bordered" />
+                            <input type="number" name='year' defaultValue={editMovieInfo?.Year} placeholder="Year" className="input input-bordered" />
                         </div>
 
                         <div className="form-control mt-6">
