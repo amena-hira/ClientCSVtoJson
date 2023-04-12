@@ -75,7 +75,7 @@ const EditModal = ({ editMovieInfo, setMovies, setCount }) => {
                             <label className="label">
                                 <span className="label-text">PROFITABILITY</span>
                             </label>
-                            <input type="number" name='profit' defaultValue={editMovieInfo?.Profitability} placeholder="PROFITABILITY" className="input input-bordered" />
+                            <input type="number" step="any" name='profit' defaultValue={editMovieInfo?.Profitability} placeholder="PROFITABILITY" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">

@@ -88,7 +88,7 @@ const Search = ({ searchFilm, setMovies, setCount }) => {
                                 <label className="label">
                                     <span className="label-text">PROFITABILITY</span>
                                 </label>
-                                <input type="number" name='profit' placeholder="PROFITABILITY" className="input input-bordered" />
+                                <input type="number" step="any" name='profit' placeholder="PROFITABILITY" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
