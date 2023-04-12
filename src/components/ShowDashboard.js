@@ -4,6 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Search from './Search';
 import EditModal from './EditModal';
 import { Link } from 'react-router-dom';
+import DeleteModal from './DeleteModal';
 
 const ShowDashboard = () => {
     // const { count, movies } = useLoaderData();
@@ -32,9 +33,6 @@ const ShowDashboard = () => {
                 setCount(data.count);
             })
     }
-    const deleteMovie = (id) => {
-        console.log(id)
-    }
     useEffect(() => {
         fetch(`http://localhost:5000/showData?page=${page}&size=${size}`)
             .then(res => res.json())
@@ -46,7 +44,7 @@ const ShowDashboard = () => {
     return (
         <>
 
-            <Search searchFilm={searchFilm}></Search>
+            <Search searchFilm={searchFilm} setMovies={setMovies} setCount={setCount}></Search>
             <div className="overflow-x-auto my-5" >
                 <table className="table text-center table-compact w-full">
                     {/* head */}
@@ -80,7 +78,7 @@ const ShowDashboard = () => {
                                         <td>{movie.Year}</td>
                                         <td>
                                             <label htmlFor="edit-modal" className="btn btn-warning mr-2" onClick={() => setEditMovieInfo(movie)}><FiEdit></FiEdit></label>
-                                            <button className="btn btn-error" onClick={() => deleteMovie(movie._id)}><MdDeleteForever></MdDeleteForever></button>
+                                            <label htmlFor="delete-modal" className="btn btn-error" onClick={() => setEditMovieInfo(movie)}><MdDeleteForever></MdDeleteForever></label>
                                         </td>
                                     </tr>)
                                 :
@@ -97,7 +95,8 @@ const ShowDashboard = () => {
                                         <td>{movie.Year}</td>
                                         <td>
                                             <label htmlFor="edit-modal" className="btn btn-warning mr-2" onClick={() => setEditMovieInfo(movie)}><FiEdit></FiEdit></label>
-                                            <button className="btn btn-error" onClick={() => deleteMovie(movie._id)}><MdDeleteForever></MdDeleteForever></button>
+                                            <label htmlFor="delete-modal" className="btn btn-error" onClick={() => setEditMovieInfo(movie)}><MdDeleteForever></MdDeleteForever></label>
+                                            
                                         </td>
                                     </tr>)
                         }
@@ -105,6 +104,7 @@ const ShowDashboard = () => {
                 </table>
             </div>
             <EditModal editMovieInfo={editMovieInfo} setMovies={setMovies} setCount={setCount}></EditModal>
+            <DeleteModal editMovieInfo={editMovieInfo} setMovies={setMovies} setCount={setCount}></DeleteModal>
             {
                 movies.length === 1 ?
                     <div className='flex justify-center'><button onClick={()=>window.location.reload()} className="btn btn-link text-center">All</button></div>
