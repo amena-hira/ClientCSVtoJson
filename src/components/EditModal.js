@@ -1,6 +1,7 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
-const EditModal = ({ editMovieInfo }) => {
+const EditModal = ({ editMovieInfo, setMovies, setCount }) => {
     const handleEditMovie = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -33,12 +34,15 @@ const EditModal = ({ editMovieInfo }) => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                toast.success('Your movie data updated!!!');
+                setMovies(data.movies);
+                setCount(data.count);
             })
     }
     return (
         <>
             <input type="checkbox" id="edit-modal" className="modal-toggle" />
-            <div className="modal">
+            <div className="modal" >
                 <div className="modal-box relative">
                     <label htmlFor="edit-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">{editMovieInfo?.Film}</h3>
@@ -93,7 +97,7 @@ const EditModal = ({ editMovieInfo }) => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button type='submit' className="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>

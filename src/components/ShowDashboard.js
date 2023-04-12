@@ -3,6 +3,7 @@ import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
 import Search from './Search';
 import EditModal from './EditModal';
+import { Link } from 'react-router-dom';
 
 const ShowDashboard = () => {
     // const { count, movies } = useLoaderData();
@@ -14,20 +15,22 @@ const ShowDashboard = () => {
 
     const pages = Math.ceil(count / size);
 
-    const searchFilm = async (event) => {
+
+    const searchFilm = (event) => {
         event.preventDefault();
         const form = event.target;
         const searchName = form.searchName.value;
         console.log(searchName)
-        const res = await fetch(`http://localhost:5000/search?film=${searchName}`);
-        const data = await res.json();
-        setMovies(data.movies);
-        setCount(data.count);
+        search(searchName);
 
     }
-    const getEditMovie = (movie) => {
-        setEditMovieInfo(movie)
-        console.log(movie)
+    const search = async (name) => {
+        fetch(`http://localhost:5000/search?film=${name}`)
+            .then(res => res.json())
+            .then(data => {
+                setMovies(data.movies);
+                setCount(data.count);
+            })
     }
     const deleteMovie = (id) => {
         console.log(id)
@@ -42,7 +45,7 @@ const ShowDashboard = () => {
     }, [page, size])
     return (
         <>
-            
+
             <Search searchFilm={searchFilm}></Search>
             <div className="overflow-x-auto my-5" >
                 <table className="table text-center table-compact w-full">
@@ -76,7 +79,7 @@ const ShowDashboard = () => {
                                         <td>{movie["Worldwide Gross"]}</td>
                                         <td>{movie.Year}</td>
                                         <td>
-                                            <label htmlFor="edit-modal" className="btn btn-warning mr-2" ><FiEdit onClick={() => getEditMovie(movie)}></FiEdit></label>
+                                            <label htmlFor="edit-modal" className="btn btn-warning mr-2" onClick={() => setEditMovieInfo(movie)}><FiEdit></FiEdit></label>
                                             <button className="btn btn-error" onClick={() => deleteMovie(movie._id)}><MdDeleteForever></MdDeleteForever></button>
                                         </td>
                                     </tr>)
@@ -93,7 +96,7 @@ const ShowDashboard = () => {
                                         <td>{movie["Worldwide Gross"]}</td>
                                         <td>{movie.Year}</td>
                                         <td>
-                                            <label htmlFor="edit-modal" className="btn btn-warning mr-2" onClick={() => getEditMovie(movie)}><FiEdit></FiEdit></label>
+                                            <label htmlFor="edit-modal" className="btn btn-warning mr-2" onClick={() => setEditMovieInfo(movie)}><FiEdit></FiEdit></label>
                                             <button className="btn btn-error" onClick={() => deleteMovie(movie._id)}><MdDeleteForever></MdDeleteForever></button>
                                         </td>
                                     </tr>)
@@ -101,20 +104,25 @@ const ShowDashboard = () => {
                     </tbody>
                 </table>
             </div>
-            <EditModal editMovieInfo={editMovieInfo}></EditModal>
-            <div className='flex justify-center'>
-                <div className='btn-group pagination'>
-                    {
-                        [...Array(pages).keys()].map(number => <button key={number} onClick={() => setPage(number)} className={page === number ? 'btn btn-active' : 'btn'}>{number}</button>)
-                    }
-                </div>
-                <select onChange={event => setSize(event.target.value)} className="ml-2 select select-bordered w-xs max-w-xs">
-                    <option value={5}>5</option>
-                    <option value={10} selected>10</option>
-                    <option value={15}>15</option>
-                    <option value={20}>20</option>
-                </select>
-            </div>
+            <EditModal editMovieInfo={editMovieInfo} setMovies={setMovies} setCount={setCount}></EditModal>
+            {
+                movies.length === 1 ?
+                    <div className='flex justify-center'><button onClick={()=>window.location.reload()} className="btn btn-link text-center">All</button></div>
+                    :
+                    <div className='flex justify-center'>
+                        <div className='btn-group pagination'>
+                            {
+                                [...Array(pages).keys()].map(number => <button key={number} onClick={() => setPage(number)} className={page === number ? 'btn btn-active' : 'btn'}>{number}</button>)
+                            }
+                        </div>
+                        <select onChange={event => setSize(event.target.value)} className="ml-2 select select-bordered w-xs max-w-xs">
+                            <option value={5}>5</option>
+                            <option value={10} selected>10</option>
+                            <option value={15}>15</option>
+                            <option value={20}>20</option>
+                        </select>
+                    </div>
+            }
         </>
     );
 };
